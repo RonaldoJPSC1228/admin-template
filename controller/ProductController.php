@@ -12,8 +12,8 @@
                 $sub_array = array();
                 $sub_array[] = $row["prod_id"];
                 $sub_array[] = $row["prod_name"];
-                $sub_array[] = '<button type="button" onClick="editar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-warning btn-sm ladda-button"><i class="fa-solid fa-pen-to-square"></i></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa-solid fa-trash"></i></button>';
+                $sub_array[] = '<button type="button" onClick="editar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-warning btn-sm ladda-button">Editar <i class="fa-solid fa-pen-to-square"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-danger btn-sm ladda-button">Eliminar <i class="fa-solid fa-trash"></i></button>';
                 $data[] = $sub_array;
             }
             $results = array(
@@ -22,7 +22,7 @@
                 "iTotalDisplayRecords" => count($data),
                 "aaData" => $data
             );
-            echo json_encode($datos);
+            echo json_encode($results);
             break;
 
         case "get_by_id":

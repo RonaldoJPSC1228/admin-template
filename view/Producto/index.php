@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../../public/css/demo_1/style.css">
     <!-- End Layout styles -->
     <link rel="shortcut icon" href="../../public/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -237,19 +238,27 @@
                 <div class="content-wrapper">
                     <div class="card">
                         <div class="card-header">
-                            Hola mundo
+                            Mantenimiento de Productos
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-                                voluptate, doloremque quisquam corporis deleniti cumque, neque sed dicta
-                                reprehenderit, consequatur magnam. Voluptas voluptate, doloremque quisquam
-                                corporis deleniti cumque, neque sed dicta reprehenderit, consequatur magnam.
-                            </p>
+                            <h4 class="card-title">Products</h4>
+                            <table id="productos_data" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="card-footer">
+                        <!-- <div class="card-footer">
                             <button class="btn btn-primary">Aceptar</button>
                             <button class="btn btn-secondary">Cancelar</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
@@ -269,6 +278,8 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../../public/vendors/js/vendor.bundle.base.js"></script>
@@ -283,6 +294,29 @@
     <!-- Custom js for this page-->
     <script src="../../public/js/shared/jquery.cookie.js" type="text/javascript"></script>
     <!-- End custom js for this page-->
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+
+    <!-- jQuery (si no está ya cargado) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <!-- Botones -->
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+    <!-- Exportar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script type="text/javascript" src="producto.js"></script>
 </body>
 
 </html>
