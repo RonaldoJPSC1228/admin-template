@@ -6,13 +6,7 @@ function init() {
 }
 
 $(document).ready(function () {
-    $.post("../../controller/CategoryController.php?op=select_category", function (data) {
-        // console.log("categorias recibidas: " + data);
-        
-        $("#cat_id").html(data);
-    });
-
-    tabla = $('#productos_data').dataTable({
+    tabla = $('#categorias_data').dataTable({
         "aProcessing": true,//Activamos el procesamiento del datatables
         "aServerSide": true,//Paginación y filtrado realizados por el servidor
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
@@ -22,7 +16,7 @@ $(document).ready(function () {
             'csvHtml5'
         ],
         "ajax": {
-            url: '../../controller/ProductController.php?op=list_product',
+            url: '../../controller/CategoryController.php?op=list_category',
             type: "get",
             dataType: "json",
             error: function (e) {
@@ -35,23 +29,21 @@ $(document).ready(function () {
     }).DataTable();
 });
 
-function editar(prod_id) {
+function editar(cat_id) {
 
-    $("#mdltitulo").html("Editar Producto");
+    $("#mdltitulo").html("Editar Categoría");
 
     $.ajax({
-        url: "../../controller/ProductController.php?op=get_by_id",
+        url: "../../controller/CategoryController.php?op=get_by_id",
         type: "POST",
-        data: { prod_id: prod_id },
+        data: { cat_id: cat_id },
         dataType: "json",
         success: function (datos) {
             console.log("Editar datos:", datos);
 
-            $("#prod_id").val(datos.prod_id);
-            $("#prod_name").val(datos.prod_name);
-            $("#prod_cant").val(datos.prod_cant);
-            $("#prod_desc").val(datos.prod_desc);
             $("#cat_id").val(datos.cat_id);
+            $("#cat_name").val(datos.cat_name);
+            $("#cat_desc").val(datos.cat_desc);
 
             $("#modalmantenimiento").modal("show");
         }
@@ -61,7 +53,7 @@ function editar(prod_id) {
 
 function eliminar(id) {
     Swal.fire({
-        title: '¿Eliminar producto?',
+        title: '¿Eliminar categoría?',
         text: "No podrás revertir esto",
         icon: 'warning',
         showCancelButton: true,
@@ -69,10 +61,10 @@ function eliminar(id) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post("../../controller/ProductController.php?op=delete_product",
-                { prod_id: id },
+            $.post("../../controller/CategoryController.php?op=delete_category",
+                { cat_id: id },
                 function () {
-                    Swal.fire('Eliminado', 'El producto fue eliminado correctamente', 'success');
+                    Swal.fire('Eliminado', 'La Categoría fue eliminada correctamente', 'success');
 
                     tabla.ajax.reload();
                 });
@@ -81,46 +73,41 @@ function eliminar(id) {
 }
 
 $(document).on("click", "#btnnuevo", function () {
-    $("#mdltitulo").html("Nuevo Producto");
-    $("#producto_form")[0].reset();
-    $("#prod_id").val("");
+    $("#mdltitulo").html("Nuevo Categoría");
+    $("#categoria_form")[0].reset();
+    $("#cat_id").val("");
     $("#modalmantenimiento").modal("show");
 });
 
-
 function limpiar() {
-    $("#producto_form")[0].reset();
+    $("#categoria_form")[0].reset();
 
-    $("#prod_id").val("");
+    $("#cat_id").val("");
 }
 
-$(document).on("submit", "#producto_form", function (e) {
+$(document).on("submit", "#categoria_form", function (e) {
     e.preventDefault();
 
-    var prod_id = $("#prod_id").val();
-    var prod_name = $("#prod_name").val();
-    var prod_cant = $("#prod_cant").val();
-    var prod_desc = $("#prod_desc").val();
     var cat_id = $("#cat_id").val();
+    var cat_name = $("#cat_name").val();
+    var cat_desc = $("#cat_desc").val();
     var url = "";
 
-    if (prod_id == "" || prod_id == null) {
-        url = "../../controller/ProductController.php?op=create_product";
+    if (cat_id == "" || cat_id == null) {
+        url = "../../controller/CategoryController.php?op=create_category";
     } else {
-        url = "../../controller/ProductController.php?op=update_product";
+        url = "../../controller/CategoryController.php?op=update_category";
     }
 
     $.ajax({
         url: url,
         type: "POST",
         data: {
-            prod_id: prod_id,
-            prod_name: prod_name,
-            prod_cant: prod_cant,
-            prod_desc: prod_desc,
-            cat_id: cat_id
+            cat_id: cat_id,
+            cat_name: cat_name,
+            cat_desc: cat_desc
         },
-        success: function (datos) {
+        success: function () {
             $("#modalmantenimiento").modal("hide");
 
             tabla.ajax.reload(null, false);

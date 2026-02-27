@@ -4,37 +4,35 @@
 <head>
     <!-- Required meta tags -->
     <?php require_once("../../public/layouts/head.php"); ?>
-    <title>Producto | Admin Dashboard Template</title>
+    <title>Categoría | Admin Dashboard Template</title>
 </head>
 
 <body>
     <div class="container-scroller">
         <?php require_once("../../public/layouts/navbar.php"); ?>
-        
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            
+
             <?php require_once("../../public/layouts/sidebar.php"); ?>
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="card">
                         <div class="card-header">
-                            Mantenimiento de Productos
+                            Mantenimiento de Categorías
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Products</h4>
+                            <h4 class="card-title">Categories</h4>
                             <button id="btnnuevo" class="btn btn-outline-primary btn-block mg-b-10">Nuevo</button>
 
                             <div class="table-wrapper">
-                                <table id="productos_data" class="table display responsive nowrap">
+                                <table id="categorias_data" class="table display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre</th>
-                                            <th>Cantidad</th>
                                             <th>Descripción</th>
-                                            <th>Categoría</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -63,7 +61,7 @@
 
     <?php require_once("../../public/layouts/app.php"); ?>
 
-    <script type="text/javascript" src="producto.js"></script>
+    <script type="text/javascript" src="categoria.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
     require_once("../config/conexion.php");
-    require_once("../models/product.php");
+    require_once("../models/Product.php");
 
     $product = new Product();
 
@@ -12,6 +12,9 @@
                 $sub_array = array();
                 $sub_array[] = $row["prod_id"];
                 $sub_array[] = $row["prod_name"];
+                $sub_array[] = $row["prod_cant"];
+                $sub_array[] = $row["prod_desc"];
+                $sub_array[] = $row["cat_name"];
                 $sub_array[] = '<button type="button" onClick="editar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-warning btn-sm ladda-button">Editar <i class="fa-solid fa-pen-to-square"></i></button>';
                 $sub_array[] = '<button type="button" onClick="eliminar(' . $row["prod_id"] . ');" id="' . $row["prod_id"] . '" class="btn btn-inline btn-danger btn-sm ladda-button">Eliminar <i class="fa-solid fa-trash"></i></button>';
                 $data[] = $sub_array;
@@ -27,16 +30,27 @@
 
         case "get_by_id":
             $datos = $product->get_product_x_id($_POST["prod_id"]);
-            echo json_encode($datos);
+            if (is_array($datos) && count($datos) > 0) {
+                $output = array();
+                foreach ($datos as $row) {
+                    $output["prod_id"] = $row["prod_id"];
+                    $output["prod_name"] = $row["prod_name"];
+                    $output["prod_cant"] = $row["prod_cant"];
+                    $output["prod_desc"] = $row["prod_desc"];
+                    $output["cat_id"] = $row["cat_id"];
+                }
+                echo json_encode($output);
+            }
+
             break;
 
         case "create_product":
-            $datos = $product->insert_product($_POST["prod_name"]);
+            $datos = $product->insert_product($_POST["prod_name"], $_POST["prod_cant"], $_POST["prod_desc"], $_POST["cat_id"]);
             echo json_encode($datos);
             break;
 
         case "update_product":
-            $datos = $product->update_product($_POST["prod_id"], $_POST["prod_name"]);
+            $datos = $product->update_product($_POST["prod_id"], $_POST["prod_name"], $_POST["prod_cant"], $_POST["prod_desc"], $_POST["cat_id"]);
             echo json_encode($datos);
             break;
 
