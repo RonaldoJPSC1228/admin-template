@@ -7,7 +7,7 @@
                     <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="profile-name">Allen Moreno</p>
+                    <p class="profile-name">Admin</p>
                     <p class="designation">Premium user</p>
                 </div>
             </a>
@@ -28,10 +28,16 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
+                        <a class="nav-link" href="../Usuarios/">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../Producto/">Producto</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Categoria/">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Orders/">Ordenes</a>
                     </li>
                 </ul>
             </div>

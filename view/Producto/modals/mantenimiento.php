@@ -28,6 +28,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="prod_reference">Referencial del Producto:</label>
+                        <input type="text" class="form-control" id="prod_reference" name="prod_reference"
+                            placeholder="Ingrese referencia" required>
+                    </div>
+
+                    <div class="form-group">
                         <label for="prod_cant">Cant del Producto:</label>
                         <input type="number" class="form-control" id="prod_cant" name="prod_cant"
                             placeholder="Ingrese cantidad" required>

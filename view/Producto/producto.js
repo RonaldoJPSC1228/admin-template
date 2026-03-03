@@ -49,6 +49,7 @@ function editar(prod_id) {
 
             $("#prod_id").val(datos.prod_id);
             $("#prod_name").val(datos.prod_name);
+            $("#prod_reference").val(datos.prod_reference);
             $("#prod_cant").val(datos.prod_cant);
             $("#prod_desc").val(datos.prod_desc);
             $("#cat_id").val(datos.cat_id);
@@ -99,6 +100,7 @@ $(document).on("submit", "#producto_form", function (e) {
 
     var prod_id = $("#prod_id").val();
     var prod_name = $("#prod_name").val();
+    var prod_reference = $("#prod_reference").val();
     var prod_cant = $("#prod_cant").val();
     var prod_desc = $("#prod_desc").val();
     var cat_id = $("#cat_id").val();
@@ -116,6 +118,7 @@ $(document).on("submit", "#producto_form", function (e) {
         data: {
             prod_id: prod_id,
             prod_name: prod_name,
+            prod_reference: prod_reference,
             prod_cant: prod_cant,
             prod_desc: prod_desc,
             cat_id: cat_id

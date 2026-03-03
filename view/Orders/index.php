@@ -4,38 +4,38 @@
 <head>
     <!-- Required meta tags -->
     <?php require_once("../../public/layouts/head.php"); ?>
-    <title>Producto | Admin Dashboard Template</title>
+    <title>Ordenes | Admin Dashboard Template</title>
 </head>
 
 <body>
     <div class="container-scroller">
         <?php require_once("../../public/layouts/navbar.php"); ?>
-        
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            
+
             <?php require_once("../../public/layouts/sidebar.php"); ?>
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="card">
                         <div class="card-header">
-                            Mantenimiento de Productos
+                            Mantenimiento de Ordenes
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Products</h4>
-                            <button id="btnnuevo" class="btn btn-outline-primary btn-block mg-b-10">Nuevo</button>
+                            <h4 class="card-title">Orders</h4>
+                            <!-- <button id="btnnuevo" class="btn btn-primary btn-rounded btn-block mg-b-10">Nuevo</button> -->
+                            <a class="btn btn-primary btn-rounded btn-block mg-b-10" href="/view/Orders/create-view.php">Crear Orden</a>
 
                             <div class="table-wrapper">
-                                <table id="productos_data" class="table display responsive nowrap">
+                                <table id="ordenes_data" class="table display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Referencia</th>
-                                            <th>Cantidad</th>
-                                            <th>Descripción</th>
-                                            <th>Categoría</th>
+                                            <th>Codigo</th>
+                                            <th>Usuario</th>
+                                            <th>Producto</th>
+                                            <th>Cant/Num</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -60,11 +60,10 @@
         <!-- page-body-wrapper ends -->
     </div>
 
-    <?php require_once("modals/mantenimiento.php"); ?>
 
     <?php require_once("../../public/layouts/app.php"); ?>
 
-    <script type="text/javascript" src="producto.js"></script>
+    <script type="text/javascript" src="order.js"></script>
 </body>
 
 </html>
