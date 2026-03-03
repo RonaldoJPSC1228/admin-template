@@ -39,51 +39,51 @@ $(document).ready(function () {
     }).DataTable();
 });
 
-// function editar(prod_id) {
+function editar(order_id) {
 
-//     $("#mdltitulo").html("Editar Producto");
+    $("#mdltitulo").html("Editar Orden");
 
-//     $.ajax({
-//         url: "../../controller/ProductController.php?op=get_by_id",
-//         type: "POST",
-//         data: { prod_id: prod_id },
-//         dataType: "json",
-//         success: function (datos) {
-//             console.log("Editar datos:", datos);
+    $.ajax({
+        url: "../../controller/OrderController.php?op=get_by_id",
+        type: "POST",
+        data: { order_id: order_id },
+        dataType: "json",
+        success: function (datos) {
+            console.log("Datos editar:", datos);
+            $("#order_id").val(datos.order_id);
+            $("#user_id").val(datos.user_id);
+            $("#prod_id").val(datos.prod_id);
+            $("#num_prod").val(datos.num_prod);
+            // Recarga selects si es necesario
+            $("#user_id").trigger('change');
+            $("#prod_id").trigger('change');
+        }
+    });
 
-//             $("#prod_id").val(datos.prod_id);
-//             $("#prod_name").val(datos.prod_name);
-//             $("#prod_reference").val(datos.prod_reference);
-//             $("#prod_cant").val(datos.prod_cant);
-//             $("#prod_desc").val(datos.prod_desc);
-//             $("#cat_id").val(datos.cat_id);
+}
 
-//             $("#modalmantenimiento").modal("show");
-//         }
-//     });
-
-// }
-
-// function eliminar(id) {
-//     Swal.fire({
-//         title: '¿Eliminar producto?',
-//         text: "No podrás revertir esto",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonText: 'Sí, eliminar',
-//         cancelButtonText: 'Cancelar'
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             $.post("../../controller/ProductController.php?op=delete_product",
-//                 { prod_id: id },
-//                 function () {
-//                     Swal.fire('Eliminado', 'El producto fue eliminado correctamente', 'success');
-
-//                     tabla.ajax.reload();
-//                 });
-//         }
-//     });
-// }
+// Eliminar orden
+function eliminar(id) {
+    Swal.fire({
+        title: '¿Eliminar orden?',
+        text: "No podrás revertir esto",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../../controller/OrderController.php?op=delete_order", { order_id: id }, function (data) {
+                if (data.status == 'success') {
+                    Swal.fire('Eliminado', 'Orden eliminada correctamente', 'success');
+                    tabla.ajax.reload();
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            }, 'json');
+        }
+    });
+}
 
 // $(document).on("click", "#btnnuevo", function () {
 //     $("#mdltitulo").html("Nuevo Producto");
@@ -99,43 +99,47 @@ $(document).ready(function () {
 //     $("#prod_id").val("");
 // }
 
-// $(document).on("submit", "#producto_form", function (e) {
-//     e.preventDefault();
+$(document).on("submit", "#order_form", function (e) {
+    e.preventDefault();  // Evita recarga de página
 
-//     var prod_id = $("#prod_id").val();
-//     var prod_name = $("#prod_name").val();
-//     var prod_reference = $("#prod_reference").val();
-//     var prod_cant = $("#prod_cant").val();
-//     var prod_desc = $("#prod_desc").val();
-//     var cat_id = $("#cat_id").val();
-//     var url = "";
+    var order_id = $("#order_id").val();
+    var user_id = $("#user_id").val();
+    var prod_id = $("#prod_id").val();
+    var num_prod = $("#num_prod").val();
+    var url = "";
 
-//     if (prod_id == "" || prod_id == null) {
-//         url = "../../controller/ProductController.php?op=create_product";
-//     } else {
-//         url = "../../controller/ProductController.php?op=update_product";
-//     }
+    // Si es nuevo o editar
+    if (order_id == "" || order_id == null) {
+        url = "../../controller/OrderController.php?op=create_order";
+    } else {
+        url = "../../controller/OrderController.php?op=update_order";
+    }
 
-//     $.ajax({
-//         url: url,
-//         type: "POST",
-//         data: {
-//             prod_id: prod_id,
-//             prod_name: prod_name,
-//             prod_reference: prod_reference,
-//             prod_cant: prod_cant,
-//             prod_desc: prod_desc,
-//             cat_id: cat_id
-//         },
-//         success: function (datos) {
-//             $("#modalmantenimiento").modal("hide");
-
-//             tabla.ajax.reload(null, false);
-//             limpiar();
-
-//             Swal.fire('Éxito', 'Guardado correctamente', 'success');
-//         }
-//     });
-// });
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            order_id: order_id,
+            user_id: user_id,
+            prod_id: prod_id,
+            num_prod: num_prod
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data.status == 'success') {
+                Swal.fire('Éxito', data.message || 'Orden guardada correctamente', 'success');
+                tabla.ajax.reload(null, false);  // Recarga la tabla si existe
+                $("#order_form")[0].reset();  // Limpia formulario
+                $("#mdltitulo").html("Nueva Orden");  // Reset título
+            } else {
+                Swal.fire('Error', data.message || 'Error al guardar', 'error');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error AJAX: " + error);
+            Swal.fire('Error', 'Error de conexión. Revisa console.', 'error');
+        }
+    });
+});
 
 init();
