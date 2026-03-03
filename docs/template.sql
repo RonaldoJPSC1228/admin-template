@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-03-2026 a las 20:30:21
+-- Tiempo de generación: 03-03-2026 a las 21:47:25
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.2.0
 
@@ -46,6 +46,26 @@ CREATE TABLE IF NOT EXISTS `tm_category` (
 INSERT INTO `tm_category` (`cat_id`, `cat_name`, `cat_desc`, `created_at`, `updated_at`, `deleted_at`, `state`) VALUES
 (1, 'Electronica', 'Dispositivos electrónicos', '2026-02-27 14:32:28', '2026-02-27 15:02:08', NULL, 1),
 (2, 'Perifericos', 'Accesorios del computador', '2026-02-27 16:04:47', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tm_order`
+--
+
+DROP TABLE IF EXISTS `tm_order`;
+CREATE TABLE IF NOT EXISTS `tm_order` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `order_code` varchar(255) NOT NULL,
+  `user_id` int NOT NULL,
+  `prod_id` int NOT NULL,
+  `num_prod` int NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `state` int NOT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
