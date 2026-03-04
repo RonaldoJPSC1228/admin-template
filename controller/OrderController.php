@@ -12,10 +12,14 @@
                 $sub_array = array();
                 $sub_array[] = $row["order_id"];
                 $sub_array[] = $row["order_code"];
-                $sub_array[] = $row["user_id"];
-                $sub_array[] = $row["prod_id"];
+                // $sub_array[] = $row["user_id"];
+                $sub_array[] = $row["user_name"];
+                // $sub_array[] = $row["prod_id"];
+                $sub_array[] = $row["prod_name"];
                 $sub_array[] = $row["num_prod"];
-                $sub_array[] = '<button type="button" onClick="editar(' . $row["order_id"] . ');" id="' . $row["order_id"] . '" class="btn btn-inline btn-warning btn-sm ladda-button">Editar <i class="fa-solid fa-pen-to-square"></i></button>';
+                $sub_array[] = '$' . number_format($row["prod_unit_value"], 2);
+                $sub_array[] = '$' . number_format($row["valor_total"], 2);
+                $sub_array[] = '<a href="/view/Orders/edit-view.php?id=' . $row["order_id"] . '" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i> Editar</a>';
                 $sub_array[] = '<button type="button" onClick="eliminar(' . $row["order_id"] . ');" id="' . $row["order_id"] . '" class="btn btn-inline btn-danger btn-sm ladda-button">Eliminar <i class="fa-solid fa-trash"></i></button>';
                 $data[] = $sub_array;
             }
@@ -26,6 +30,7 @@
                 "aaData" => $data
             );
             echo json_encode($results);
+            /* http://localhost:8000/controller/OrderController.php?op=list_order */
             break;
 
         case "get_by_id":

@@ -36,6 +36,8 @@
                                             <th>Usuario</th>
                                             <th>Producto</th>
                                             <th>Cant/Num</th>
+                                            <th>Valor Unitario</th>
+                                            <th>Valor Total</th>
                                             <th></th>
                                             <th></th>
                                         </tr>

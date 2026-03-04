@@ -6,42 +6,41 @@ function init() {
 }
 
 $(document).ready(function () {
-    $.post("../../controller/ProductController.php?op=select_product", function (data) {
-        // console.log("categorias recibidas: " + data);
-        $("#prod_id").html(data);
-    });
+    // SIEMPRE carga selects si existen (create/edit)
+    if ($("#prod_id").length) {
+        $.post("../../controller/ProductController.php?op=select_product", function (data) {
+            $("#prod_id").html(data);
+        });
+    }
+    if ($("#user_id").length) {
+        $.post("../../controller/UserController.php?op=select_user", function (data) {
+            $("#user_id").html(data);
+        });
+    }
 
-    $.post("../../controller/UserController.php?op=select_user", function (data) {
-        // console.log("usuarios recibidos: " + data);
-        $("#user_id").html(data);
-    });
+    // DataTable SOLO en index (#ordenes_data)
+    if ($("#ordenes_data").length) {
+        tabla = $('#ordenes_data').DataTable({
+            "aProcessing": true,
+            "aServerSide": true,
+            dom: 'Bfrtip',
+            buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5'],
+            "ajax": { url: '../../controller/OrderController.php?op=list_order', type: "get", dataType: "json", error: e => console.log(e.responseText) },
+            "bDestroy": true, "iDisplayLength": 5, "order": [[0, "desc"]]
+        });
+    }
 
-    tabla = $('#ordenes_data').dataTable({
-        "aProcessing": true,//Activamos el procesamiento del datatables
-        "aServerSide": true,//Paginación y filtrado realizados por el servidor
-        dom: 'Bfrtip',//Definimos los elementos del control de tabla
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5'
-        ],
-        "ajax": {
-            url: '../../controller/OrderController.php?op=list_order',
-            type: "get",
-            dataType: "json",
-            error: function (e) {
-                console.log(e.responseText);
-            }
-        },
-        "bDestroy": true,
-        "iDisplayLength": 5,//Paginación
-        "order": [[0, "desc"]]//Ordenar (columna,orden)
-    }).DataTable();
+    // Auto-editar en edit-view (puro JS)
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (id && editar) {
+        editar(id);
+    }
 });
 
 function editar(order_id) {
 
-    $("#mdltitulo").html("Editar Orden");
+    
 
     $.ajax({
         url: "../../controller/OrderController.php?op=get_by_id",
@@ -85,14 +84,6 @@ function eliminar(id) {
     });
 }
 
-// $(document).on("click", "#btnnuevo", function () {
-//     $("#mdltitulo").html("Nuevo Producto");
-//     $("#producto_form")[0].reset();
-//     $("#prod_id").val("");
-//     $("#modalmantenimiento").modal("show");
-// });
-
-
 // function limpiar() {
 //     $("#producto_form")[0].reset();
 
@@ -126,11 +117,17 @@ $(document).on("submit", "#order_form", function (e) {
         },
         dataType: "json",
         success: function (data) {
-            if (data.status == 'success') {
-                Swal.fire('Éxito', data.message || 'Orden guardada correctamente', 'success');
-                tabla.ajax.reload(null, false);  // Recarga la tabla si existe
-                $("#order_form")[0].reset();  // Limpia formulario
-                $("#mdltitulo").html("Nueva Orden");  // Reset título
+            console.log('Respuesta:', data);
+            if (data && data.status === 'success') {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: data.message || 'Orden guardada',
+                    icon: 'success',
+                    timer: 1500,  // Auto-cierra en 1.5s
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = '../Orders/';  // o '../Orders/index.php'
+                });
             } else {
                 Swal.fire('Error', data.message || 'Error al guardar', 'error');
             }

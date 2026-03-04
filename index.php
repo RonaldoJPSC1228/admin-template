@@ -52,7 +52,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary submit-btn btn-block">Login</button>
+                                    <a class="btn btn-primary submit-btn btn-block" href="/view/Home">Login</a>
+
                                 </div>
                                 <div class="form-group d-flex justify-content-between">
                                     <div class="form-check form-check-flat mt-0">

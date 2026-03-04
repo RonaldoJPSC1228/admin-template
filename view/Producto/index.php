@@ -34,6 +34,7 @@
                                             <th>Nombre</th>
                                             <th>Referencia</th>
                                             <th>Cantidad</th>
+                                            <th>Valor Unitario</th>
                                             <th>Descripción</th>
                                             <th>Categoría</th>
                                             <th></th>

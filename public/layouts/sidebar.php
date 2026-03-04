@@ -14,7 +14,7 @@
         </li>
         <li class="nav-item nav-category">Main Menu</li>
         <li class="nav-item">
-            <a class="nav-link" href="../Home/">
+            <a class="nav-link" href="/view/Dashboard/">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
@@ -28,16 +28,16 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="../Usuarios/">Usuarios</a>
+                        <a class="nav-link" href="/view/Usuarios/">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Producto/">Producto</a>
+                        <a class="nav-link" href="/view/Producto/">Producto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Categoria/">Categorias</a>
+                        <a class="nav-link" href="/view/Categoria/">Categorias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Orders/">Ordenes</a>
+                        <a class="nav-link" href="/view/Orders/">Ordenes</a>
                     </li>
                 </ul>
             </div>

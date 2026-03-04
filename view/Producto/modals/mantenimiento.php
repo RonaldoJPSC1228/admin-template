@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="cat_id">Categoría del Producto:</label>
-                        <select class="form-control" id="cat_id" name="cat_id" required>
+                        <select class="form-control" id="cat_id" name="cat_id">
                             <!-- Las opciones se cargarán dinámicamente desde el servidor -->
                         </select>
                     </div>
@@ -37,6 +37,12 @@
                         <label for="prod_cant">Cant del Producto:</label>
                         <input type="number" class="form-control" id="prod_cant" name="prod_cant"
                             placeholder="Ingrese cantidad" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod_unit_value">v/u del Producto:</label>
+                        <input type="number" class="form-control" id="prod_unit_value" name="prod_unit_value"
+                            placeholder="Ingrese unit value" required>
                     </div>
 
                     <div class="form-group">

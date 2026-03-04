@@ -30,7 +30,7 @@
                                 <div class="card">
                                     <form method="post" id="order_form">
                                         <div class="card-header">
-                                            <h5 class="card-title" id="mdltitulo">Crear Orden</h5>
+                                            <h5 class="card-title" id="mdltitulo">Editar Orden</h5>
                                         </div>
 
                                         <div class="card-body">
@@ -61,8 +61,8 @@
                                         <div class="card-footer">
                                             <a class="btn btn-secondary" href="../Orders/">Cerrar</a>
 
-                                            <button type="submit" id="btnGuardar" class="btn btn-primary">
-                                                Guardar
+                                            <button type="submit" id="btnActualizar" class="btn btn-primary">
+                                                Actualizar
                                             </button>
                                         </div>
                                     </form>
@@ -80,7 +80,6 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
-
 
     <?php require_once("../../public/layouts/app.php"); ?>
 
